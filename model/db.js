@@ -27,7 +27,7 @@ process.on('SIGINT', function() {
 /** Add SCHEMAS HERE ** */
 // schema Users
 var userSchema = new mongoose.schema({
-    firstName : {type : String},
+    firstName : {type : String, unique : true},
     lastName : String,
     userName : String,
     phone : Number,
@@ -35,7 +35,7 @@ var userSchema = new mongoose.schema({
 
 });
 //quotes schema
-var Quotes = new mongoose.schema({
+var quoteSchema = new mongoose.schema({
     topic : {type : String},
     author : String,
     reference : String,
@@ -43,7 +43,12 @@ var Quotes = new mongoose.schema({
 });
 //schema RemoteServers
 var remoteServers = new mongoose.schema({
-    URL : {type : String}
+    URL : {type : String},
+    topic : String,
+    authors : String
 
 });
 
+mongoose.model("user", userSchema);
+mongoose.model("quotes", quoteSchema);
+mongoose.model("remoteserver", remoteServers);
