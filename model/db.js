@@ -25,4 +25,25 @@ process.on('SIGINT', function() {
 });
 
 /** Add SCHEMAS HERE ** */
+// schema Users
+var userSchema = new mongoose.schema({
+    firstName : {type : String},
+    lastName : String,
+    userName : String,
+    phone : Number,
+    passWord : String
+
+});
+//quotes schema
+var Quotes = new mongoose.schema({
+    topic : {type : String},
+    author : String,
+    reference : String,
+    quote : Number
+});
+//schema RemoteServers
+var remoteServers = new mongoose.schema({
+    URL : {type : String}
+
+});
 
