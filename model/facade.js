@@ -23,7 +23,7 @@ function createUser(data){
 
     });
 }
-
+//find a nice sexy user
 function findAllUser(){
     User.find(function(err,result){
         if(err)
