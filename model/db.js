@@ -40,7 +40,7 @@ var quoteSchema = new mongoose.Schema({
     topic : {type : String},
     author : String,
     reference : String,
-    quote : Number
+    quote : String
 });
 //schema RemoteServers
 var remoteServers = new mongoose.Schema({

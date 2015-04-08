@@ -7,10 +7,17 @@ var Quotes = mong.model("quotes");
 var RemoteServers = mong.model("remoteserver");
 
 
-/*var data = [
+var brugerOpret = [
     {firstName: "TestNavn", lastName: "testLastName",userName :"testUser",phone : 12345678,passWord:"1234Pass"},
     {firstName: "aabb", lastName: "bbaa",userName :"aabb90",phone : 87654321,passWord:"aabbPass"}
-];*/
+];
+
+var quotesOpret = [
+    { topic : "Work", author : "Pope paul vi", reference : "http://www.brainyquote.com", quote : "All life demands struggle. Those who have everything given to them become lazy, selfish, and insensitive to the real values of life. The very striving and hard work that we so constantly try to avoid is the major building block in the person we are today."},
+    { topic : "Work", author : "Confucius", reference : "http://www.brainyquote.com", quote : "Choose a job you love, and you will never have to work a day in your life."},
+    { topic : "Wisdom", author : "Audrey Hepburn", reference : "http://www.brainyquote.com", quote : "For beautiful eyes, look for the good in others; for beautiful lips, speak only words of kindness; and for poise, walk with the knowledge that you are never alone"},
+    { topic : "Wisdom", author : "John C Maxwell", reference : "http://www.brainyquote.com", quote : "A man must be big enough to admit his mistakes, smart enough to profit from them, and strong enough to correct them."}
+];
 
 //user
 function createUser(data){
@@ -18,44 +25,61 @@ function createUser(data){
         if(err){
         return console.log(err);
         }
-
         return console.log(user);
 
     });
 }
 
-function findAllUser(){
-    User.find(function(err,result){
-        if(err)
-            return console.log(err);
+function createQuote(data,callback){
+    Quotes.create(data,function(err,quote){
+        if(err){
+            return callback(err);
+        }
 
-        console.log(result);
-    });
-    return result;
-}
+        callback(null,quote);
 
+    })
+};
 
-function findUserOnUsername (username,callback){
+//createQuote(quotesOpret);
 
-    User.findOne({ 'userName': username }, function (err, result) {
+    function findAllTopic(callback){
+
+       Quotes.distinct('topic',function(err,result){
+
+            if(err)
+                return callback(err);
+
+            callback(null,result);
+        })
+    };
+
+/*
+var allQuoteswithTopic= [];
+function findQuotesOnTopic(topic){
+
+   Quotes.find({ 'topic': topic }, function (err, result) {
         if (err) return handleError(err);
-        //console.log(result.firstName) // Space Ghost is a talk show host.
-        callback = result.firstName;
+        console.log("hej"+result+"\n"); // Space Ghost is a talk show host.
+        allQuoteswithTopic = result;
     });
+    console.log("hesdg " + allQuoteswithTopic[0]);
 }
+findQuotesOnTopic("Wisdom");
+*/
 
+/*
 console.log(findUserOnUsername('aabb90',function(res){
     console.log(res);
 }));
+*/
 
 
 
-
-
-
-
-
-
+module.exports = {
+getAllTopic : findAllTopic,
+    createQuote : createQuote
+}
 
 
 
