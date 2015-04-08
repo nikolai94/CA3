@@ -1,5 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var facade = require("../model/facade");
+
+router.get('/api/quote', function(req,res,next)
+{
+
+    facade.getAllTopic(function(err,allQuotes){
+        if(err) {return next(err);}
+
+        res.send(JSON.stringify(allQuotes));
+    res.end("");
+
+
+})
+
+});
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -14,3 +29,5 @@ router.get('/', function (req, res) {
 });
 
 module.exports = router;
+
+
