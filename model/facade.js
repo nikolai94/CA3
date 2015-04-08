@@ -7,10 +7,10 @@ var Quotes = mong.model("quotes");
 var RemoteServers = mong.model("remoteserver");
 
 
-var data = [
+/*var data = [
     {firstName: "TestNavn", lastName: "testLastName",userName :"testUser",phone : 12345678,passWord:"1234Pass"},
     {firstName: "aabb", lastName: "bbaa",userName :"aabb90",phone : 87654321,passWord:"aabbPass"}
-];
+];*/
 
 //user
 function createUser(data){
@@ -31,4 +31,37 @@ function findAllUser(){
 
         console.log(result);
     });
+    return result;
 }
+
+
+function findUserOnUsername (username,callback){
+
+    User.findOne({ 'userName': username }, function (err, result) {
+        if (err) return handleError(err);
+        //console.log(result.firstName) // Space Ghost is a talk show host.
+        callback = result.firstName;
+    });
+}
+
+console.log(findUserOnUsername('aabb90',function(res){
+    console.log(res);
+}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

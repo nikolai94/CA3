@@ -1,7 +1,8 @@
 var mongoose = require( 'mongoose' );
 
+
 //Uncomment if you are going to use a local instance or add connection details for your account on MongoLab
-//var dbURI = 'mongodb://localhost/quotes';
+var dbURI = 'mongodb://localhost/quotes';
 
 mongoose.connect(dbURI);
 
@@ -26,7 +27,7 @@ process.on('SIGINT', function() {
 
 /** Add SCHEMAS HERE ** */
 // schema Users
-var userSchema = new mongoose.schema({
+var userSchema = new mongoose.Schema({
     firstName : {type : String, unique : true},
     lastName : String,
     userName : String,
@@ -35,14 +36,14 @@ var userSchema = new mongoose.schema({
 
 });
 //quotes schema
-var quoteSchema = new mongoose.schema({
+var quoteSchema = new mongoose.Schema({
     topic : {type : String},
     author : String,
     reference : String,
     quote : Number
 });
 //schema RemoteServers
-var remoteServers = new mongoose.schema({
+var remoteServers = new mongoose.Schema({
     URL : {type : String},
     topic : String,
     authors : String
