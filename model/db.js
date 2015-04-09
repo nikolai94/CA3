@@ -1,8 +1,13 @@
 var mongoose = require( 'mongoose' );
 
 
-//Uncomment if you are going to use a local instance or add connection details for your account on MongoLab
-var dbURI = 'mongodb://localhost/quotes';
+//This is set by the backend tests
+if( typeof global.TEST_DATABASE != "undefined" ) {
+    dbURI = global.TEST_DATABASE;
+}
+else {
+    var dbURI = 'mongodb://localhost/quotes';
+}
 
 mongoose.connect(dbURI);
 
