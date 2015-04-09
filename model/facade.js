@@ -84,6 +84,21 @@ function findQuotesOnTopic(topic, callback){
 }
 
 
+function checkIfUserExists(user,password,callback){
+    User.findOne({userName : user },function(err,findUser){
+        if(err) {
+            return callback(err);
+        }
+        if(findUser != null && findUser.passWord === password){
+            callback(null,true);
+        } else
+        {
+            callback(null,false);
+        }
+    })
+}
+
+
 /*
 console.log(findUserOnUsername('aabb90',function(res){
     console.log(res);
@@ -96,7 +111,9 @@ module.exports = {
 getAllTopic : findAllTopic,
     createQuote : createQuote,
     findAllQuotes : findAllQuotes,
-    findQuotesOnTopic : findQuotesOnTopic
+    findQuotesOnTopic : findQuotesOnTopic,
+    checkIfUserExists : checkIfUserExists,
+    createUser: createUser
 }
 
 

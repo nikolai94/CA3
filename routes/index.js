@@ -92,10 +92,11 @@ router.post('/api/quote', function(req, res, next) {
 
 
 
+
 /* GET home page. */
 router.get('/', function (req, res) {
   //Will be true when the "login" part has been completed
-  if (typeof req.session != "undefined" && typeof req.session.user != "undefined") {
+    if (typeof req.session != "undefined" && typeof req.session.user != "undefined") {
     var user = req.session.user;
     res.render("main.ejs", {user: user});
   }
