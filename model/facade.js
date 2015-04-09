@@ -41,8 +41,6 @@ function createQuote(data,callback){
     })
 };
 
-//createQuote(quotesOpret);
-
     function findAllTopic(callback){
 
        Quotes.distinct('topic',function(err,result){
@@ -54,19 +52,37 @@ function createQuote(data,callback){
         })
     };
 
-/*
-var allQuoteswithTopic= [];
-function findQuotesOnTopic(topic){
+
+function findAllQuotes(callback){
+
+    Quotes.find(function(err,result){
+
+        if(err)
+            return callback(err);
+
+       // callback(null,result);
+        console.log(result);
+    })
+};
+
+
+
+
+
+function findQuotesOnTopic(topic, callback){
 
    Quotes.find({ 'topic': topic }, function (err, result) {
-        if (err) return handleError(err);
-        console.log("hej"+result+"\n"); // Space Ghost is a talk show host.
-        allQuoteswithTopic = result;
+       if (err) return callback(err);
+
+      /* if (!result.length) {
+           callback(null, "Topic does not exist");
+       }*/
+        callback(null, result);
+
+
     });
-    console.log("hesdg " + allQuoteswithTopic[0]);
 }
-findQuotesOnTopic("Wisdom");
-*/
+
 
 /*
 console.log(findUserOnUsername('aabb90',function(res){
@@ -78,7 +94,9 @@ console.log(findUserOnUsername('aabb90',function(res){
 
 module.exports = {
 getAllTopic : findAllTopic,
-    createQuote : createQuote
+    createQuote : createQuote,
+    findAllQuotes : findAllQuotes,
+    findQuotesOnTopic : findQuotesOnTopic
 }
 
 
