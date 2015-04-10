@@ -120,6 +120,13 @@ router.get('/', function (req, res) {
   }
 });
 
+router.put('/api/quote/:topic/:id', function (reg, res) {
+facade.updateQuote(reg.params.id,reg.body.quote, function (err,data) {
+if(err){ res.send(JSON.stringify(err));}
+})
+});
+
+
 module.exports = router;
 
 

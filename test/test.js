@@ -112,9 +112,39 @@ describe('quotes', function(){
             });
 
         });
-    });
+
+    it("should delete a quote", function (done) {
+        Quotes.findOne({quote : "Choose a job you love, and you will never have to work a day in your life." },function(err,quote){
+            facade.delQuotes(quote._id, function(err,callback) {
+                if(err){ console.log(err);}
+                Quotes.find({ 'topic': "Work" }, function (err, result) {
+                    result.length.should.equal(1);
+
+                });
+            })
+        });
+
+        done();
+});
+
+    it("should update a quote", function (done) {
+        Quotes.find({ 'topic': "Wisdom" }, function (err, result) {
+
+            facade.updateQuote(result[0]._id,"vandflaske",function(err,data){
 
 
+                Quotes.find({ 'topic': "Wisdom" }, function (err, result) {
+                    result[0].quote.should.equal("vandflaske");
+
+                })
+            })
+            done();
+        })
+
+
+
+});
+});
 describe ('User', function(){
 
     beforeEach(function (done){
@@ -150,7 +180,7 @@ describe ('User', function(){
     });
 
     it("should add a user", function (done) {
-        var data = {firstName: "TestNavn", lastName: "testLastName",userName :"Bruger 3",phone : 12345678,passWord:"1234Pass"};
+        var data = {firstName: "teeest", lastName: "testLastName",userName :"Bruger 3",phone : 12345678,passWord:"1234Pass"};
         facade.createUser(data, function (err, newUser) {
             if (err) throw err;
             newUser.userName.should.equal("Bruger 3");
@@ -158,6 +188,5 @@ describe ('User', function(){
         });
 
     });
-
 
 });

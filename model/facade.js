@@ -30,6 +30,17 @@ function createUser(data){
     });
 }
 
+function createUser(data,callback){
+    User.create(data,function(err,User){
+        if(err){
+            return callback(User);
+        }
+
+        callback(null,User);
+
+    })
+};
+
 function createQuote(data,callback){
     Quotes.create(data,function(err,quote){
         if(err){
@@ -65,12 +76,22 @@ function findAllQuotes(callback){
     })
 };
 
+function updateQuote(id,newQuote,callback){
+
+    Quotes.update({ _id: id },{ quote: newQuote }, function (err, result) {
+        if(err){console.log(err);}
+        return result;
+    })
+
+};
+
+
+
 
 
 
 
 function findQuotesOnTopic(topic, callback){
-
    Quotes.find({ 'topic': topic }, function (err, result) {
        if (err) return callback(err);
 
@@ -78,8 +99,6 @@ function findQuotesOnTopic(topic, callback){
            callback(null, "Topic does not exist");
        }*/
         callback(null, result);
-
-
     });
 }
 
@@ -128,7 +147,8 @@ getAllTopic : findAllTopic,
     findQuotesOnTopic : findQuotesOnTopic,
     checkIfUserExists : checkIfUserExists,
     createUser: createUser,
-    delQuotes : delQuotes
+    delQuotes : delQuotes,
+    updateQuote: updateQuote
 }
 
 
