@@ -12,7 +12,7 @@ router.get('/api/quote', function(req,res,next)
         if(err) {return next(err);}
 
         res.send(JSON.stringify(allQuotes));
-    res.end("");
+        res.end("");
 
 
     })
@@ -108,17 +108,21 @@ router.post('/delQuoteInDB', function(req, res, next) {
 });
 
 
+
 /* GET home page. */
 router.get('/', function (req, res) {
-  //Will be true when the "login" part has been completed
-    if (typeof req.session != "undefined" && typeof req.session.user != "undefined") {
-    var user = req.session.user;
-    res.render("main.ejs", {user: user});
-  }
-  else {
-    res.render("main.ejs", {user: user});
-  }
+    //Will be true when the "login" part has been completed
+    if (typeof req.session != "undefined" && typeof req.session.userName != "undefined") {
+        var user = req.session.userName;
+        res.render("main.ejs", {user: user});
+    }
+    else {
+        res.render("main.ejs", {user: user});
+    }
 });
+
+
+
 
 module.exports = router;
 

@@ -26,13 +26,12 @@ app.use(cookieParser());
 
 
 
+app.use(session({secret: 'very_sercret_3162735', saveUninitialized: true, resave: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', routes);
 app.use('/partials', partials);
-
-app.use(session({secret: 'very_sercret_3162735', saveUninitialized: true, resave: true}));
-
 
 app.use(function (req, res, next) {
     var userName = req.session.userName;
@@ -55,7 +54,6 @@ app.use(function (req, res, next) {
                 else {
                     req.session.userName = userName;
                     delete req.session.loginerror;
-                    console.log("testSession"+req.session.userName);
                 }
 
                 return res.redirect("/");
@@ -63,17 +61,11 @@ app.use(function (req, res, next) {
             })
         }
         else {
-            console.log("else");
             req.url = "/login";
             return next();
         }
     }
 });
-
-
-
-
-
 
 
 
