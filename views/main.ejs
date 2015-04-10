@@ -31,14 +31,16 @@
 
                     <!-- BELOW is EJS Code to display menu items depending on whether you are logged in or not -->
 
-                    <% if((typeof user == 'undefined')) {%>
+                    <% if((typeof req.session.userName == 'undefined')) {%>
                       <li><a class="useajax" href="partials/login">Login</a></li>
                       <li><a class="useajax" href="partials/signup">Sign Up</a></li>
                     <% }%>
 
-                    <% if(!(typeof user == 'undefined')) {%>
+                    <% if(!(typeof req.session.userName == 'undefined')) {%>
                     <!--<li><a class="useajax" href="partials/logoff">Log out</a></li>-->
                     <li><a href="partials/pageB" class="useajax">Test PageB</a></li>
+                    <li><a href="partials/addQuote" class="useajax">Add Quote</a></li>
+                    <li><a href="partials/delQuote" class="useajax">Delete Quote</a></li>
                     <% } %>
 
                 </ul>
