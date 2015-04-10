@@ -10,11 +10,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 
 var path = __dirname.substr(0,__dirname.lastIndexOf("\\"));  //Remove the routes part
-/*
-router.get('/', function(req, res, next) {
-    res.render('index', { user: req.session.userName });
-});
-*/
+
 
 router.get('/home', function(req, res) {
    res.render('home',{quote: {"quote" : "A clear conscience is usually the sign of a bad memory", "author"  :  "Unknown", category: "general"}});
