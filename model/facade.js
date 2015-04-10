@@ -98,6 +98,20 @@ function checkIfUserExists(user,password,callback){
     })
 }
 
+function delQuotes(id,callback) {
+
+
+    Quotes.remove({ _id: id }, function(err) {
+        if (!err) {
+            return 'notification!';
+        }
+        else {
+            return 'error';
+        }
+    });
+
+}
+
 
 /*
 console.log(findUserOnUsername('aabb90',function(res){
@@ -113,7 +127,8 @@ getAllTopic : findAllTopic,
     findAllQuotes : findAllQuotes,
     findQuotesOnTopic : findQuotesOnTopic,
     checkIfUserExists : checkIfUserExists,
-    createUser: createUser
+    createUser: createUser,
+    delQuotes : delQuotes
 }
 
 

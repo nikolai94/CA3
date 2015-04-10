@@ -72,13 +72,6 @@ router.get('/api/quote/:topic/:ran', function(req,res,next)
 
 router.post('/api/quote', function(req, res, next) {
     var theJoke = req.body;
-    //var obj = JSON.parse(theJoke);
-    /*jokeFacade.addJoke({joke: theJoke},function(err,newJoke){
-        if(err)
-            return next(err);
-        res.redirect("/addJoke");
-    })*/
-    //res.send(theJoke);
 
     facade.createQuote(theJoke ,function(err, newJoke){
         if(err)
@@ -91,6 +84,28 @@ router.post('/api/quote', function(req, res, next) {
 });
 
 
+router.post('/addQuoteToDB', function(req, res, next) {
+    var topic =  req.body.topic;
+    var author =  req.body.author;
+    var reference =  req.body.reference;
+    var quote =  req.body.quote;
+
+    var quoteObject = {topic : topic, author : author, reference : reference, quote : quote};
+
+    facade.createQuote(quoteObject,function(err, newQuote){
+        if(err)
+            return next(err);
+        console.log('newQuote:'+newQuote);
+    });
+    res.redirect("/");
+
+});
+
+
+router.post('/delQuoteInDB', function(req, res, next) {
+    var id =  req.body.quoteId;
+    res.send("Test"+id);
+});
 
 
 /* GET home page. */

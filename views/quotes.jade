@@ -1,0 +1,14 @@
+h1 quotes
+div(style="background: lightblue;padding: 1em;")
+    a(href="/") <--Tilbage
+    br
+    br
+    each row in quote
+        b Author: #{row.author}
+        br
+        i Id: #{row._id}
+        br
+        i Topic: #{row.topic}
+        p Quote:
+        p #{row.quote}
+        br

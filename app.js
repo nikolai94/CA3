@@ -50,16 +50,20 @@ app.use(function (req, res, next) {
             facade.checkIfUserExists(userName, password, function (err, result) {
                 if (err || result === false) {
                     req.session.loginerror = "Wrong password or user name";
+                    return res.render("login", {loginerror: "Wrong password or user name"});
                 }
                 else {
                     req.session.userName = userName;
-                    delete req.session.req.session.loginerror;
+                    delete req.session.loginerror;
+                    console.log("testSession"+req.session.userName);
                 }
 
-                return res.render("main.ejs", {user: userName});
+                return res.redirect("/");
+                //return res.render("main.ejs", {user: userName});
             })
         }
         else {
+            console.log("else");
             req.url = "/login";
             return next();
         }
